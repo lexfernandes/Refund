@@ -41,7 +41,6 @@ form.onsubmit = (e) => {
   };
   // chama a função que irá adicionar o item a lista.
   expenseAdd(newExpense);
-  console.log(newExpense);
 };
 
 function expenseAdd(newExpense) {
@@ -50,13 +49,29 @@ function expenseAdd(newExpense) {
     const expenseItem = document.createElement("li");
     expenseItem.classList.add("expense");
 
-    //cria o icopne da categoria
+    //cria o icone da categoria
     const expenseIcon = document.createElement("img");
     expenseIcon.setAttribute("src", `img/${newExpense.category_id}.svg`);
     expenseIcon.setAttribute("alt", newExpense.category_name);
 
+    //Cria uma div com as informações
+    const expenseInfo = document.createElement("div");
+    expenseInfo.classList.add("expense-info");
+
+    //cria um strong para adicionar texto a categoria.
+    const expenseStrong = document.createElement("strong");
+    expenseStrong.textContent = newExpense.category_name;
+
+    const expense = document.createElement("span");
+    expense.textContent = newExpense.expense;
+
+    //Adiciona o strong dentro da div
+    expenseInfo.appendChild(expenseStrong);
+    expenseInfo.appendChild(expense);
+
     //adiciona as informações no item li
     expenseItem.append(expenseIcon);
+    expenseItem.append(expenseInfo);
 
     //adiciona o item na lista ul
     expenseList.append(expenseItem);

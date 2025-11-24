@@ -1,13 +1,14 @@
 //Capturando os dados do HTML.
+const form = document.querySelector("form");
 const amount = document.getElementById("amount");
+const expense = document.getElementById("expense");
+const category = document.getElementById("category");
 
 amount.oninput = () => {
   // Filtrando letras de números
   let value = amount.value.replace(/\D/g, "");
-
   // recebe o valor formatado no modo real.
   amount.value = formattedCurrencyBRL(value);
-  console.log(amount.value);
 };
 //Formata no padrão brasileiro (Real)
 function formattedCurrencyBRL(value) {
@@ -20,3 +21,20 @@ function formattedCurrencyBRL(value) {
   // retornar o valor formatado.
   return formatted;
 }
+
+//captura o evento de submit do formulário para obter os valores
+form.onsubmit = (e) => {
+  //previne o comportamento padrão de recarregar a página.
+  e.preventDefault();
+  // cria uma objeto com os detalhes na nova despesa
+  const newExpense = {
+    id: new Date().getTime(),
+    expense: expense.value,
+    category_id: category.value,
+    category_name: category.options[category.selectedIndex].text,
+    amount: amount.value,
+    created_at: new Date(),
+  };
+
+  console.log(newExpense);
+};

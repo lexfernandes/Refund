@@ -5,7 +5,6 @@ const expense = document.getElementById("expense");
 const category = document.getElementById("category");
 
 //seleciona os elementos da lista
-
 const expenseList = document.querySelector("ul");
 
 amount.oninput = () => {
@@ -62,8 +61,22 @@ function expenseAdd(newExpense) {
     const expenseStrong = document.createElement("strong");
     expenseStrong.textContent = newExpense.category_name;
 
+    //cria uma span para informar nome da despesa
     const expense = document.createElement("span");
     expense.textContent = newExpense.expense;
+
+    // Cria um span para mostrar o valor da despesa
+    const expenseAmount = document.createElement("span");
+    expenseAmount.classList.add("expense-amount");
+    expenseAmount.textContent = newExpense.amount;
+
+    // cria um small para colocar o R$ na pagina
+    const small = document.createElement("small");
+    small.textContent = "R$";
+
+    const removeIcon = document.createElement("img");
+    removeIcon.classList.add("remove-icon");
+    removeIcon.setAttribute("src", `img/remove.svg`);
 
     //Adiciona o strong dentro da div
     expenseInfo.appendChild(expenseStrong);
@@ -72,6 +85,8 @@ function expenseAdd(newExpense) {
     //adiciona as informações no item li
     expenseItem.append(expenseIcon);
     expenseItem.append(expenseInfo);
+    expenseItem.append(expenseAmount);
+    expenseItem.append(removeIcon);
 
     //adiciona o item na lista ul
     expenseList.append(expenseItem);

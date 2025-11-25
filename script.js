@@ -59,11 +59,11 @@ function expenseAdd(newExpense) {
 
     //cria um strong para adicionar texto a categoria.
     const expenseStrong = document.createElement("strong");
-    expenseStrong.textContent = newExpense.category_name;
+    expenseStrong.textContent = newExpense.expense;
 
     //cria uma span para informar nome da despesa
-    const expense = document.createElement("span");
-    expense.textContent = newExpense.expense;
+    const expenseName = document.createElement("span");
+    expenseName.textContent = newExpense.category_name;
 
     // Cria um span para mostrar o valor da despesa
     const expenseAmount = document.createElement("span");
@@ -79,8 +79,7 @@ function expenseAdd(newExpense) {
     removeIcon.setAttribute("src", `img/remove.svg`);
 
     //Adiciona o strong dentro da div
-    expenseInfo.appendChild(expenseStrong);
-    expenseInfo.appendChild(expense);
+    expenseInfo.append(expenseStrong, expenseName);
 
     //adiciona as informações no item li
     expenseItem.append(expenseIcon);

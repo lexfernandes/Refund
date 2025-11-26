@@ -7,6 +7,7 @@ const category = document.getElementById("category");
 //seleciona os elementos da lista
 const expenseList = document.querySelector("ul");
 const expenseQuantity = document.querySelector("aside header p span");
+const expenseTotal = document.querySelector("aside header h2");
 
 amount.oninput = () => {
   // Filtrando letras de números
@@ -120,8 +121,19 @@ function updateTotals() {
     }
     //incrementa o valor
     total += Number(value);
-    console.log(total);
   }
+
+  //cria um span para adicionar o R$ formatado
+  const symbolBRL = document.createElement("small");
+  symbolBRL.textContent = "R$";
+
+  // formata o valor e remove o R$ que será exibido pelo small com estilo customizado
+  total = formattedCurrencyBRL(total).toUpperCase().replace("R$", "");
+  //limpa o conteúdo do elemento
+  expenseTotal.innerHTML = "";
+
+  // adiciona o simbolo da moeda e o valor total formatado.
+  expenseTotal.append(symbolBRL, total);
   try {
   } catch (error) {
     console.log(error);

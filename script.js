@@ -8,6 +8,7 @@ const category = document.getElementById("category");
 const expenseList = document.querySelector("ul");
 const expenseQuantity = document.querySelector("aside header p span");
 const expenseTotal = document.querySelector("aside header h2");
+const removeIcon = document.querySelector("img");
 
 amount.oninput = () => {
   // Filtrando letras de números
@@ -90,6 +91,11 @@ function expenseAdd(newExpense) {
     //adiciona o item na lista ul
     expenseList.append(expenseItem);
     updateTotals();
+
+    removeIcon.addEventListener("click", () => {
+      expenseItem.remove();
+      updateTotals();
+    });
   } catch (error) {
     alert("Não foi possível atualizar a lista de despesas.");
     console.log(error);
@@ -134,6 +140,7 @@ function updateTotals() {
 
   // adiciona o simbolo da moeda e o valor total formatado.
   expenseTotal.append(symbolBRL, total);
+
   try {
   } catch (error) {
     console.log(error);

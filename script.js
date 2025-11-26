@@ -8,7 +8,6 @@ const category = document.getElementById("category");
 const expenseList = document.querySelector("ul");
 const expenseQuantity = document.querySelector("aside header p span");
 const expenseTotal = document.querySelector("aside header h2");
-const removeIcon = document.querySelector("img");
 
 amount.oninput = () => {
   // Filtrando letras de números
@@ -91,11 +90,6 @@ function expenseAdd(newExpense) {
     //adiciona o item na lista ul
     expenseList.append(expenseItem);
     updateTotals();
-
-    removeIcon.addEventListener("click", () => {
-      expenseItem.remove();
-      updateTotals();
-    });
   } catch (error) {
     alert("Não foi possível atualizar a lista de despesas.");
     console.log(error);
@@ -147,3 +141,13 @@ function updateTotals() {
     alert("Não foi possível atualizar os totais.");
   }
 }
+//Evento que captura o clique nos intens da lista.
+expenseList.addEventListener("click", function (event) {
+  //Verifica se o elemento clicado é o ícone de remover.
+  if (event.target.classList.contains("remove-icon")) {
+    //Obtem a li pai do elemento clicado
+    const item = event.target.closest(".expense");
+    item.remove();
+    updateTotals();
+  }
+});
